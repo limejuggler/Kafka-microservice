@@ -1,0 +1,7 @@
+* GUI
+* Subscription to events with microsystem architecture (subscribe to news feed for instance)
+   - Publisher / subscriber
+   - Kafka server
+   - XML messages
+* Flow control to avoid overwhelm receivers
+   - Measure performance (and present on GUI)
