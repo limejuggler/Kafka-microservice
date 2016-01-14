@@ -18,6 +18,8 @@ import javax.swing.text.DefaultCaret;
  */
 public class RxSender extends javax.swing.JPanel {
 
+    
+    
     public RxSender(Page page) {
         initComponents();
         DefaultCaret caret = (DefaultCaret)jTextArea1.getCaret();
