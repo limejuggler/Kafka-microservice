@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 /**
  *
@@ -16,6 +17,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
  */
 public class Subscriber extends Connector {
 
+     KafkaConsumer<String,String> consumer = new KafkaConsumer<String, String>(getProperties()); 
+    
     public ArrayList<String> getMessages(String topic) {
         ArrayList<String> list = new ArrayList();
         consumer.subscribe(Arrays.asList(topic));
