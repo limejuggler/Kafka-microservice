@@ -6,12 +6,14 @@
 
 package com.oss.pages;
 
+import com.nordea.pubsubapi.Connector;
+import com.nordea.pubsubapi.Subscriber;
 import com.oss.Page;
 
-import java.awt.Color;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+//import com.nordea.pubsubmicroservice.
 
 /**
  *
@@ -26,7 +28,7 @@ public class RxReciever extends javax.swing.JPanel {
         initComponents();
     }
     
-    private volatile boolean running;
+    private volatile boolean running = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,9 +65,33 @@ public class RxReciever extends javax.swing.JPanel {
         
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            
+        running = !running;
+        
+        Thread t = new Thread()
+        {
+            @Override
+            public void run()
+            {
+                Subscriber sub = new Subscriber();
+                while(running)
+                {
+                    final ArrayList<String> messages = sub.getMessages(Subscriber.default_topic);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(RxReciever.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    for (String message : messages)
+                    {
+                        System.out.println(message);
+                        jTextArea1.append(message);
+                    }
+                    sub.getMessages(Connector.default_topic);
+                }
+            }
+        };
+        t.start();
     }//GEN-LAST:event_jButton1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
