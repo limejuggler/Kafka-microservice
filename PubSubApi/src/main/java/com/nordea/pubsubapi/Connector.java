@@ -18,6 +18,8 @@ public class Connector {
     KafkaProducer<String,String> producer = new KafkaProducer<String, String>(getProperties());
     KafkaConsumer<String,String> consumer = new KafkaConsumer<String, String>(getProperties());    
     
+    public static String default_topic = "defaultTopic";
+    
     private static Properties getProperties() {
         Properties properties = new Properties();
         properties.put("bootstrap.servers", "euve35533.startvps.com:9092");
