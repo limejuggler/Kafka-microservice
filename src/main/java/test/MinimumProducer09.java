@@ -1,11 +1,10 @@
 package test;
-
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.util.Properties;
 
-public class MinimumProducer {
+public class MinimumProducer09 {
     public static final String TOPIC="TEST_TOPIC";
 
     public static void main(String[] args) throws InterruptedException {
@@ -19,7 +18,7 @@ public class MinimumProducer {
 
     private static Properties getProperties() {
         Properties properties = new Properties();
-        properties.put("bootstrap.servers","euve35533.startvps.com:2181");
+        properties.put("bootstrap.servers","euve35533.startvps.com:9092");
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         return properties;
