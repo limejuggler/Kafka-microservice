@@ -148,16 +148,6 @@ public class GenericApp implements ActionListener, ItemListener {
                         System.err.println("Unable to close CONNECTION" + ex.getMessage());
                     }
                 }
-
-                int n = JOptionPane.showConfirmDialog(
-                        frame,
-                        "Save configuration ?\n",
-                        "Closing application",
-                        JOptionPane.YES_NO_OPTION);
-
-                if (n == 0) {
-                    saveConfiguration();
-                }
             }
         });
 
