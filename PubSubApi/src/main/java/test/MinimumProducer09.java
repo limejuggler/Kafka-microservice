@@ -1,25 +1,21 @@
 package test;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerRecord;
 
-import java.time.LocalDateTime;
+import com.nordea.pubsubapi.Publisher;
 import java.util.Properties;
 
 public class MinimumProducer09 {
-    public static final String TOPIC="TEST_TOPIC";
 
     public static void main(String[] args) throws InterruptedException {
-        Properties properties = getProperties();
-        KafkaProducer<String,String> producer = new KafkaProducer<String, String>(properties);
-        while(true){
+        Publisher pub = new Publisher();
+        while (true) {            
+            pub.send(Publisher.default_topic, "Hello world!");
             Thread.sleep(500);
-            producer.send(new ProducerRecord<String, String>(TOPIC,"Message sent at time: "+ LocalDateTime.now()));
         }
     }
 
     private static Properties getProperties() {
         Properties properties = new Properties();
-        properties.put("bootstrap.servers","euve35533.startvps.com:9092");
+        properties.put("bootstrap.servers", "euve35533.startvps.com:9092");
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         return properties;

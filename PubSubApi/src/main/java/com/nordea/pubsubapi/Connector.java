@@ -5,24 +5,11 @@
  */
 package com.nordea.pubsubapi;
 
-import java.util.Properties;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.producer.KafkaProducer;
-
 /**
  *
  * @author Tore
  */
 public class Connector {
-
     public static String default_topic = "defaultTopic";
 
-    public static Properties getProperties() {
-        Properties properties = new Properties();
-        properties.put("bootstrap.servers", "euve35533.startvps.com:9092");
-        properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        properties.put("group.id", "trace_consumer");
-        return properties;
-    }
 }
