@@ -16,7 +16,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
  */
 public class Subscriber extends Connector {
 
-    public ArrayList<String> subscribe(String topic) {
+    public ArrayList<String> getMessages(String topic) {
         ArrayList<String> list = new ArrayList();
         consumer.subscribe(Arrays.asList(topic));
         ConsumerRecords<String, String> records = consumer.poll(250);
