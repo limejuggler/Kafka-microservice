@@ -1,10 +1,12 @@
+package com.nordea.pubsubmicroservice;
+
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.time.LocalDateTime;
 import java.util.Properties;
 
-public class MiniumProducer {
+public class MinimumProducer {
     public static final String TOPIC="TEST_TOPIC";
 
     public static void main(String[] args) throws InterruptedException {
@@ -18,7 +20,7 @@ public class MiniumProducer {
 
     private static Properties getProperties() {
         Properties properties = new Properties();
-        properties.put("bootstrap.servers","localhost:9092");
+        properties.put("bootstrap.servers","euve35533.startvps.com:9092");
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         return properties;
