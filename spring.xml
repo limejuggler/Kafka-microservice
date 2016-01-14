@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	    spring-beans-3.0.xsd">
+
+
+    
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+         <property name="host" value="HHHHUB02"/>
+    </bean>
+    
+    <bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="AdaptivSmokeTestNotification"/>
+        <property name="subject" value="Adaptiv SMOKE test"/>
+    </bean>
+    
+<bean id="adaptivNotification" class="com.oss.pages.Adaptiv.AdaptivNotification">
+    <property name="mailSender" ref="mailSender"/>
+    <property name="templateMessage" ref="templateMessage"/>
+</bean>
+
+    
+ <!--   
+    <bean id="oracleDataSource" class="oracle.jdbc.pool.OracleDataSource">
+        <property name="dataSourceName" value="ds"/>
+        <property name="URL" value="jdbc:oracle:thin:@Ora_TIPT2:1521:TIPT2"/>
+        <property name="user" value="sa"/>
+        <property name="password" value="sa"/>
+    </bean>
+
+    <bean id="oracleConnection" class="connectivity.db.DbConnection">
+        <property name="dataSource">
+            <ref bean="oracleDataSource"/>
+        </property>
+    </bean>
+
+    <bean id="JdbcDataSource"
+      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName">
+            <value>sun.jdbc.odbc.JdbcOdbcDriver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:odbc:KronosTest</value>
+        </property>
+        <property name="username">
+            <value>kronosadmin</value>
+        </property>
+        <property name="password">
+            <value>krns</value>
+        </property>
+    </bean>
+    
+    <bean id="jdbcConnection" class="connectivity.db.DbConnection">
+        <property name="dataSource">
+            <ref bean="JdbcDataSource"/>
+        </property>
+    </bean>
+
+    -->
+
+    
+</beans>

@@ -1,0 +1,1 @@
+java.exe -jar ./target/AdaptivUtil-1.0-SNAPSHOT.one-jar.jar doRun:ApativTest
