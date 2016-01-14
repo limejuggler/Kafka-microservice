@@ -1,12 +1,11 @@
-package com.nordea.pubsubmicroservice;
-
+package test;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.time.LocalDateTime;
 import java.util.Properties;
 
-public class MinimumProducer {
+public class MinimumProducer09 {
     public static final String TOPIC="TEST_TOPIC";
 
     public static void main(String[] args) throws InterruptedException {

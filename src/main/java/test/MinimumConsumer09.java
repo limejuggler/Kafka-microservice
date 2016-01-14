@@ -1,4 +1,4 @@
-package com.nordea.pubsubmicroservice;
+package test;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -10,11 +10,11 @@ import java.util.Properties;
 /**
  * Created by g47602 on 12/01/2016.
  */
-public class MinimumConsumer {
+public class MinimumConsumer09 {
     public static void main(String[] args) {
         Properties properties = getProperties();
         KafkaConsumer<String,String> consumer = new KafkaConsumer<String, String>(properties);
-        consumer.subscribe(Arrays.asList(MinimumProducer.TOPIC));
+        consumer.subscribe(Arrays.asList(MinimumProducer09.TOPIC));
         while(true){
             ConsumerRecords<String, String> records = consumer.poll(250);
             for(ConsumerRecord<String,String> record:records){
