@@ -78,7 +78,7 @@ public class AppData {
     }
     
     @ElementMap(entry = "key", value = "value", attribute = true, inline = true)
-    public HashMap<String, String> settings = new HashMap<>();
+    public HashMap<String, String> settings = new HashMap();
     
     public void inititiateSettingsKey() {
         settings.put("Test", "1000");       

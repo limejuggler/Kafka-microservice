@@ -1,0 +1,24 @@
+<genericAppDescriptor>
+   <appName>Adaptiv Util</appName>
+   <width>1400</width>
+   <height>800</height>
+   <startPage>
+      <id>1</id>
+      <pageName>RxSender</pageName>
+      <pageViewClass>com.oss.pages.RxSender</pageViewClass>
+   </startPage>
+   <page>
+      <id>1</id>
+      <pageName>RxSender</pageName>
+      <pageViewClass>com.oss.pages.RxSender</pageViewClass>
+      <loadAtStartUp>true</loadAtStartUp>
+      <doShow>true</doShow>
+   </page>
+   <page>
+      <id>2</id>
+      <pageName>RxReceiver</pageName>
+      <pageViewClass>com.oss.pages.RxReciever</pageViewClass>
+      <loadAtStartUp>true</loadAtStartUp>
+      <doShow>true</doShow>
+   </page>
+</genericAppDescriptor>

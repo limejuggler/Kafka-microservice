@@ -53,7 +53,7 @@ public class GenericAppDescriptor {
     }
 
     public ArrayList<String> getPagesMappings() {
-        ArrayList<String> mappings = new ArrayList<>();
+        ArrayList<String> mappings = new ArrayList();
         for (Page page : pages) {
             if (!mappings.contains(page.pageViewClass)) {
                 mappings.add(page.pageViewClass);

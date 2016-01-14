@@ -3,7 +3,6 @@ package com.nordea.pubsubmicroservice;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
-import java.time.LocalDateTime;
 import java.util.Properties;
 
 public class MinimumProducer {
@@ -14,7 +13,7 @@ public class MinimumProducer {
         KafkaProducer<String,String> producer = new KafkaProducer<String, String>(properties);
         while(true){
             Thread.sleep(500);
-            producer.send(new ProducerRecord<String, String>(TOPIC,"Message sent at time: "+ LocalDateTime.now()));
+            producer.send(new ProducerRecord<String, String>(TOPIC,"Message sent at time: " ));
         }
     }
 
