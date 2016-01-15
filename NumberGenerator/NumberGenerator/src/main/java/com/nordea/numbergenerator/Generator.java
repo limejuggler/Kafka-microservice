@@ -11,35 +11,37 @@ package com.nordea.numbergenerator;
 public class Generator 
 {
     private int fibNext = 1, fibCur = 0, fibPrev = 0;
-    private int nextPrime = 0;
+    private int nextPrime = 1;
     public String getNextFibonacciNumber()
     {
         if(0 == fibCur)
         {
             fibCur = fibNext;
-            return "0";
+            return "0\n";
         }
         if(1 == fibNext)
         {
             fibCur = fibNext;
             fibNext = fibCur + fibPrev;
             fibPrev = fibCur;
-            return fibCur + "";
+            return fibCur + "\n";
         }
         
         fibNext = fibCur + fibPrev;
         fibPrev = fibCur;
         fibCur = fibNext;
         
-        return fibCur + "";
+        return fibCur + "\n";
     }
     
-    public String getPrimeNumbers()
+    public String getNextPrimeNumber()
     {
-        boolean potentialPrimeNumber = true;
+        boolean potentialPrimeNumber;
         while(true)
         {
             nextPrime++;
+            potentialPrimeNumber = true;
+            
             if(1 == nextPrime || 2 == nextPrime || 3 == nextPrime)
             {
                 break;
@@ -55,11 +57,9 @@ public class Generator
                     potentialPrimeNumber = false;
             }
             if(potentialPrimeNumber)
-                break;
-            
-            potentialPrimeNumber = true;
+                break;   
         }
         
-        return nextPrime + "";
+        return nextPrime + "\n";
     }
 }

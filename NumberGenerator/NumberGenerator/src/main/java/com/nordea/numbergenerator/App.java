@@ -1,4 +1,7 @@
 package com.nordea.numbergenerator;
+
+import com.nordea.pubsubapi.Publisher;
+
 /**
  * Hello world!
  *
@@ -8,21 +11,17 @@ public class App
     public static final String topic1 = "Fibnumbers";
     public static final String topic2 = "Primenumbers";
 
-    public static void main( String[] args )
+    public static void main( String[] args ) throws InterruptedException
     {
-        int amount = 10;
+        int amount = 100;
         Generator gen = new Generator();
+        Publisher pub = new Publisher();
         
-        System.out.println("The first 10 numbers of the Fiboncaci sequence are:\n");
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < amount; i++)
         {
-            System.out.println(gen.getNextFibonacciNumber());
-        }
-        
-        System.out.println("The first 10 prime numbers are:\n");
-        for(int i = 0; i < 20; i++)
-        {
-            System.out.println(gen.getPrimeNumbers());
+            pub.send(topic1, gen.getNextFibonacciNumber());
+            pub.send(topic2, gen.getNextPrimeNumber());
+            Thread.sleep(1000);
         }
     }
 }
