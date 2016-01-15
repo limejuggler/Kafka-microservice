@@ -23,7 +23,7 @@ public class ChatSender extends javax.swing.JPanel {
     Publisher pub;
     
     public ChatSender(Page page) {
-        pub =  Publisher.getInstance();
+        pub =  new Publisher();
         initComponents();
         DefaultCaret caret = (DefaultCaret)jTextArea1.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
@@ -56,7 +56,7 @@ public class ChatSender extends javax.swing.JPanel {
         });
         jPanel1.add(jButton1);
 
-        jTextField1.setText("Enter Topic Name here");
+        jTextField1.setText("Topic_name");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -81,27 +81,16 @@ public class ChatSender extends javax.swing.JPanel {
         add(jScrollPane2);
     }// </editor-fold>//GEN-END:initComponents
 
-    private volatile boolean execute;
-
     public void startExecuting() {
-        this.execute = true;
-        thread.start();
-        jButton1.setBackground(Color.RED);
-    }
-
-    public void stopExecuting() {
-        this.execute = false;
-        jButton1.setBackground(Color.GRAY);
+        pub.send(jTextField1.getText(), jTextArea2.getText());
+        jTextArea1.append("You sent on " + jTextField1.getText() + ": " + jTextArea2.getText() + "\n");
+        jTextArea2.setText("");
+        jTextArea1.repaint();
+        jTextArea2.repaint();
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        if (!execute) {
             startExecuting();
-
-        } else {
-            stopExecuting();
-        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -119,23 +108,4 @@ public class ChatSender extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-    Random rn = new Random();
-    int i = 0;
-    Thread thread = new Thread() {
-        @Override
-        public void run() {
-            while (execute) {
-                i++;
-                try {
-                    Thread.sleep(100);
-                    //final int nextInt = rn.nextInt(10000);
-                    pub.send(Publisher.default_topic, i+"");
-                    jTextArea1.append(Publisher.default_topic + " : " + i + "\n");
-                    jTextArea1.repaint();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(ChatSender.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-    };
 }
