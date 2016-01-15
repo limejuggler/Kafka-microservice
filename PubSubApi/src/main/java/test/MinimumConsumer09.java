@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class MinimumConsumer09 {
 
     public static void main(String[] args) {
-        Subscriber sub = new Subscriber();
+        Subscriber sub = Subscriber.getInstance();
         while (true) {
             try {
                 final ArrayList<String> messages = sub.getMessages(Subscriber.default_topic);

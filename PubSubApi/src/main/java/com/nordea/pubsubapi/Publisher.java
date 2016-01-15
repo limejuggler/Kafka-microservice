@@ -16,8 +16,22 @@ import org.apache.kafka.clients.producer.ProducerRecord;
  */
 public class Publisher extends Connector {
 
-    KafkaProducer<String, String> producer = new KafkaProducer<String, String>(getProperties());
+    private Publisher() {
+    }
 
+   
+    KafkaProducer<String, String> producer = new KafkaProducer<String, String>(getProperties());
+    static Publisher pub;
+    
+    public static Publisher getInstance()
+    {
+        if (pub==null)
+        {
+            pub = new Publisher();
+        }
+        return pub;
+    }
+    
     private static Properties getProperties() {
         Properties properties = new Properties();
         properties.put("bootstrap.servers", "euve35533.startvps.com:9092");

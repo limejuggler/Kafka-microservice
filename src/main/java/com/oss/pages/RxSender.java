@@ -23,7 +23,7 @@ public class RxSender extends javax.swing.JPanel {
     Publisher pub;
     
     public RxSender(Page page) {
-        pub = new Publisher();
+        pub =  Publisher.getInstance();
         initComponents();
         DefaultCaret caret = (DefaultCaret)jTextArea1.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
@@ -98,9 +98,9 @@ public class RxSender extends javax.swing.JPanel {
                 i++;
                 try {
                     Thread.sleep(100);
-                    final int nextInt = rn.nextInt(10000);
-                    pub.send(Publisher.default_topic, nextInt+"");
-                    jTextArea1.append(Publisher.default_topic + " : " + nextInt + "\n");
+                    //final int nextInt = rn.nextInt(10000);
+                    pub.send(Publisher.default_topic, i+"");
+                    jTextArea1.append(Publisher.default_topic + " : " + i + "\n");
                     jTextArea1.repaint();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(RxSender.class.getName()).log(Level.SEVERE, null, ex);

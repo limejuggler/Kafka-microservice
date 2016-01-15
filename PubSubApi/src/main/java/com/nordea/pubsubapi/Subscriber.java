@@ -5,6 +5,7 @@
  */
 package com.nordea.pubsubapi;
 
+import static com.nordea.pubsubapi.Publisher.pub;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Properties;
@@ -18,8 +19,21 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
  */
 public class Subscriber extends Connector {
 
+    private Subscriber() {
+    }
+    
     KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(getProperties());
 
+    static Subscriber sub;
+    public static Subscriber getInstance()
+    {
+        if (sub==null)
+        {
+            sub = new Subscriber();
+        }
+        return sub;
+    }
+    
     private static Properties getProperties() {
         Properties properties = new Properties();
         properties.put("bootstrap.servers", "euve35533.startvps.com:9092");
