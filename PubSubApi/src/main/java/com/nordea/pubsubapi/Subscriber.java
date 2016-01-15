@@ -19,21 +19,9 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
  */
 public class Subscriber extends Connector {
 
-    private Subscriber() {
-    }
-    
     KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(getProperties());
-
     static Subscriber sub;
-    public static Subscriber getInstance()
-    {
-        if (sub==null)
-        {
-            sub = new Subscriber();
-        }
-        return sub;
-    }
-    
+
     private static Properties getProperties() {
         Properties properties = new Properties();
         properties.put("bootstrap.servers", "euve35533.startvps.com:9092");
@@ -49,9 +37,12 @@ public class Subscriber extends Connector {
         ConsumerRecords<String, String> records = consumer.poll(250);
         for (ConsumerRecord<String, String> record : records) {
             String value = record.value();
-            System.out.println(value);
             list.add(value);
         }
         return list;
+    }
+
+    public void unSubScribe() {
+        consumer.unsubscribe();
     }
 }

@@ -76,7 +76,7 @@ public class RxReciever extends javax.swing.JPanel {
   
 
         
-    Subscriber sub =  Subscriber.getInstance();
+    Subscriber sub =  new Subscriber();
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         running = !running;
         if (running)

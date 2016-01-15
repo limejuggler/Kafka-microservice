@@ -21,7 +21,7 @@ public class RxSender extends javax.swing.JPanel {
     Publisher pub;
 
     public RxSender(Page page) {
-        pub = Publisher.getInstance();
+        pub = new Publisher();
         initComponents();
         DefaultCaret caret = (DefaultCaret) jTextArea1.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);

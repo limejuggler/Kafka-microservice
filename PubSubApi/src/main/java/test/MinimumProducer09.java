@@ -6,7 +6,7 @@ import java.util.Properties;
 public class MinimumProducer09 {
 
     public static void main(String[] args) throws InterruptedException {
-        Publisher pub =  Publisher.getInstance();
+        Publisher pub =  new Publisher();
         for (int i=0; i<50; i++)
         {
             pub.send(Publisher.default_topic, "Hello world! : " + i);

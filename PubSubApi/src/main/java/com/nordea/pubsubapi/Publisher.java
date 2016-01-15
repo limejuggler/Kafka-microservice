@@ -15,22 +15,9 @@ import org.apache.kafka.clients.producer.ProducerRecord;
  * @author Tore
  */
 public class Publisher extends Connector {
-
-    private Publisher() {
-    }
-
    
     KafkaProducer<String, String> producer = new KafkaProducer<String, String>(getProperties());
     static Publisher pub;
-    
-    public static Publisher getInstance()
-    {
-        if (pub==null)
-        {
-            pub = new Publisher();
-        }
-        return pub;
-    }
     
     private static Properties getProperties() {
         Properties properties = new Properties();

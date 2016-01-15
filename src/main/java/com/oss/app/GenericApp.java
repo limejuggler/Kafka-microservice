@@ -21,6 +21,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.io.PrintStream;
 import java.lang.reflect.Constructor;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class GenericApp implements ActionListener, ItemListener {
     public static ArrayList<Connection> connectionStore = new ArrayList();
 
     public static GenericApp app = new GenericApp();
-    
+
     public static boolean headless = false;
 
     public static void main(String... aArgs) {
@@ -94,7 +95,22 @@ public class GenericApp implements ActionListener, ItemListener {
         } else {
             appDescriptor = GenericAppUtil.loadAppDescriptor(appFileName);
         }
+        redirect();
         app.buildAndDisplayGui();
+
+    }
+
+    public static void redirect() {
+        System.setOut(new PrintStream(System.out) {
+            public void print(String s) {
+                addLogMessage(s);
+            }
+        });
+        System.setErr(new PrintStream(System.err) {
+            public void print(String s) {
+                addLogMessage(s);
+            }
+        });
     }
 
     public static Object getSpringBean(String name) {
@@ -362,8 +378,9 @@ public class GenericApp implements ActionListener, ItemListener {
 
     public void sleep(int seconds) {
         try {
-            if (app.frame!=null) 
+            if (app.frame != null) {
                 app.frame.repaint();
+            }
             Thread.sleep(seconds * 1000);
         } catch (InterruptedException e) {
         }
