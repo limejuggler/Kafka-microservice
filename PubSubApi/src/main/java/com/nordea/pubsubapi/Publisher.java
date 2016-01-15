@@ -5,7 +5,6 @@
  */
 package com.nordea.pubsubapi;
 
-import static java.lang.System.getProperties;
 import java.util.Properties;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -14,10 +13,8 @@ import org.apache.kafka.clients.producer.ProducerRecord;
  *
  * @author Tore
  */
-public class Publisher extends Connector {
-   
+public class Publisher extends Connector {   
     KafkaProducer<String, String> producer = new KafkaProducer<String, String>(getProperties());
-    static Publisher pub;
     
     private static Properties getProperties() {
         Properties properties = new Properties();
