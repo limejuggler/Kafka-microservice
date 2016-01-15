@@ -29,15 +29,6 @@ public class Publisher extends Connector {
         producer.send(new ProducerRecord<String, String>(topic, message));
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            if (producer != null) {
-                producer.close();
-            }
-        } finally {
-            super.finalize();
-        }
-    }
+
 
 }

@@ -10,7 +10,6 @@ import com.nordea.pubsubapi.Subscriber;
 import com.oss.Page;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.DefaultCaret;
@@ -98,7 +97,7 @@ public class ChatSenderReceiver extends javax.swing.JPanel {
         add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void startExecuting() {
+    public void send() {
         pub.send(jTextField1.getText(), jTextArea2.getText());
         jTextArea1.append("[Sent] " + jTextField1.getText() + ": " + jTextArea2.getText() + "\n");
         jTextArea2.setText("");
@@ -107,7 +106,7 @@ public class ChatSenderReceiver extends javax.swing.JPanel {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        startExecuting();
+        send();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -118,7 +117,6 @@ public class ChatSenderReceiver extends javax.swing.JPanel {
     Subscriber sub;
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
         running = !running;
         if (running) {
             sub = new Subscriber();
@@ -147,8 +145,6 @@ public class ChatSenderReceiver extends javax.swing.JPanel {
         } else {
             jButton2.setBackground(Color.GRAY);
         }
-
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
