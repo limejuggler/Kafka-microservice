@@ -48,14 +48,5 @@ public class Subscriber extends Connector {
         }
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            if (consumer!=null)
-                consumer.close();
-        } finally {
-            super.finalize();
-        }
-    }
 
 }
