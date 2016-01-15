@@ -4,6 +4,7 @@
  */
 package com.nordea.twitterlistener;
 
+import java.util.ArrayList;
 import java.util.List;
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -16,25 +17,29 @@ import twitter4j.TwitterFactory;
  *
  * @author Emil
  */
-public class Listener {
-
-    public void listenForTag() {
+public class Listener 
+{
+    public ArrayList<String> listenForTag() 
+    {
+        ArrayList<String> tweetList = new ArrayList<String>();
         Twitter twitter = new TwitterFactory().getInstance();
         try {
-            Query query = new Query("source: https://twitter.com/nordeamarkets");
+            Query query = new Query("@NordeaMarkets");
             QueryResult result;
             do {
                 result = twitter.search(query);
                 List<Status> tweets = result.getTweets();
-                for (Status tweet : tweets) {
-                    System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+                for (Status tweet : tweets) 
+                {
+                    tweetList.add(tweet.getText());
                 }
             } while ((query = result.nextQuery()) != null);
-            System.exit(0);
         } catch (TwitterException te) {
             te.printStackTrace();
             System.out.println("Failed to search tweets: " + te.getMessage());
             System.exit(-1);
         }
+        
+        return tweetList;
     }
 }
