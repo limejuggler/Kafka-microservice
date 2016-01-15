@@ -5,7 +5,6 @@
  */
 package com.nordea.pubsubapi;
 
-import static com.nordea.pubsubapi.Publisher.pub;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Properties;
@@ -18,9 +17,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
  * @author Tore
  */
 public class Subscriber extends Connector {
-
     KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(getProperties());
-    static Subscriber sub;
 
     private static Properties getProperties() {
         Properties properties = new Properties();
@@ -43,6 +40,12 @@ public class Subscriber extends Connector {
     }
 
     public void unSubScribe() {
+        try {
         consumer.unsubscribe();
+        }
+        catch (Exception ex)
+        {
+         // ignore unsubscribe errors
+        }
     }
 }

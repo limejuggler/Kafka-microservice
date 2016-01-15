@@ -105,6 +105,7 @@ public class RxReciever extends javax.swing.JPanel {
                         jTextArea1.repaint();                        
                     }
                 }
+                sub.unSubScribe();
             }
         };
         t.start();
