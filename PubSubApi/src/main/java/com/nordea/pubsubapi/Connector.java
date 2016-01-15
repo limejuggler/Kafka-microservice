@@ -10,6 +10,6 @@ package com.nordea.pubsubapi;
  * @author Tore
  */
 public class Connector {
-    public static String default_topic = "defaultTopic";
+    public static String default_topic = "chat";
 
 }

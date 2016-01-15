@@ -17,21 +17,28 @@ public class Generator
         if(0 == fibCur)
         {
             fibCur = fibNext;
-            return "0\n";
+            return "0";
         }
         if(1 == fibNext)
         {
             fibCur = fibNext;
             fibNext = fibCur + fibPrev;
             fibPrev = fibCur;
-            return fibCur + "\n";
+            return fibCur + "";
         }
         
         fibNext = fibCur + fibPrev;
         fibPrev = fibCur;
         fibCur = fibNext;
         
-        return fibCur + "\n";
+        return fibCur + "";
+    }
+    
+    public void reset()
+    {
+        fibNext = 1;
+        fibCur = 0;
+        fibPrev = 0;
     }
     
     public String getNextPrimeNumber()
@@ -60,6 +67,6 @@ public class Generator
                 break;   
         }
         
-        return nextPrime + "\n";
+        return nextPrime + "";
     }
 }
