@@ -6,7 +6,7 @@ package com.nordea.twitterlistener;
 
 
 import java.util.List;
-import javax.management.Query;
+import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -23,7 +23,7 @@ public class Listener
     {
         Twitter twitter = new TwitterFactory().getInstance();
         try {
-            Query query = new Query();
+            Query query = new Query("source: https://twitter.com/nordeamarkets");
             QueryResult result;
             do {
                 result = twitter.search(query);
