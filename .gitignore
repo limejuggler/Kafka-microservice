@@ -13,3 +13,4 @@ hs_err_pid*
 /PubSubApi/target/
 /GUI/Consumer/target/
 /NumberGenerator/NumberGenerator/target/
+/TwitterListener/TwitterListener/target/
