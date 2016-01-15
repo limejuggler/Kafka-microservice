@@ -17,8 +17,9 @@ public class App
         ArrayList<String> tweets = l.listenForTag();
         for(int i = 0; i < tweets.size(); ++i)
         {
-            pub.send(topic, tweets.get(i));
-            Thread.sleep(50);
+            String resultString = tweets.get(i).toString().replaceAll("/", "");
+            pub.send(topic, resultString);           
+            Thread.sleep(1000);
         }
     }
 }
