@@ -10,17 +10,17 @@ public class App
 
     public static void main( String[] args )
     {
-        int amount = 10;
+        int amount = 100;
         Generator gen = new Generator();
         
-        System.out.println("The first 10 numbers of the Fiboncaci sequence are:\n");
-        for(int i = 0; i < 10; i++)
+        System.out.println("The first " + amount + " numbers of the Fiboncaci sequence are:\n");
+        for(int i = 0; i < amount; i++)
         {
             System.out.println(gen.getNextFibonacciNumber());
         }
         
-        System.out.println("The first 10 prime numbers are:\n");
-        for(int i = 0; i < 20; i++)
+        System.out.println("The first " + amount + " prime numbers are:\n");
+        for(int i = 0; i < amount; i++)
         {
             System.out.println(gen.getPrimeNumbers());
         }
