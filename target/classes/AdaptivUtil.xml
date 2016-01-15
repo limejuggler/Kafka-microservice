@@ -21,4 +21,11 @@
       <loadAtStartUp>true</loadAtStartUp>
       <doShow>true</doShow>
    </page>
+   <page>
+      <id>3</id>
+      <pageName>ChatSender</pageName>
+      <pageViewClass>com.oss.pages.ChatSender</pageViewClass>
+      <loadAtStartUp>true</loadAtStartUp>
+      <doShow>true</doShow>
+   </page>
 </genericAppDescriptor>
