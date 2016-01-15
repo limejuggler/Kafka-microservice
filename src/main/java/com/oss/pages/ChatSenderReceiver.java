@@ -6,8 +6,10 @@
 package com.oss.pages;
 
 import com.nordea.pubsubapi.Publisher;
+import com.nordea.pubsubapi.Subscriber;
 import com.oss.Page;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,15 +19,14 @@ import javax.swing.text.DefaultCaret;
  *
  * @author g46737
  */
-public class ChatSender extends javax.swing.JPanel {
+public class ChatSenderReceiver extends javax.swing.JPanel {
     
-
     Publisher pub;
-    
-    public ChatSender(Page page) {
-        pub =  new Publisher();
+
+    public ChatSenderReceiver(Page page) {
+        pub = new Publisher();
         initComponents();
-        DefaultCaret caret = (DefaultCaret)jTextArea1.getCaret();
+        DefaultCaret caret = (DefaultCaret) jTextArea1.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
     }
 
@@ -39,8 +40,9 @@ public class ChatSender extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -49,13 +51,13 @@ public class ChatSender extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
-        jButton1.setText("Send");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Receive");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
+        jPanel1.add(jButton2);
 
         jTextField1.setText(Publisher.default_topic);
         jTextField1.setMinimumSize(new java.awt.Dimension(120, 26));
@@ -66,6 +68,14 @@ public class ChatSender extends javax.swing.JPanel {
             }
         });
         jPanel1.add(jTextField1);
+
+        jButton1.setText("Send");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
 
         add(jPanel1, java.awt.BorderLayout.NORTH);
 
@@ -90,23 +100,62 @@ public class ChatSender extends javax.swing.JPanel {
 
     public void startExecuting() {
         pub.send(jTextField1.getText(), jTextArea2.getText());
-        jTextArea1.append("You sent on " + jTextField1.getText() + ": " + jTextArea2.getText() + "\n");
+        jTextArea1.append("[Sent] " + jTextField1.getText() + ": " + jTextArea2.getText() + "\n");
         jTextArea2.setText("");
         jTextArea1.repaint();
         jTextArea2.repaint();
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            startExecuting();
+        startExecuting();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private volatile boolean running = false;
+    Subscriber sub;
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        running = !running;
+        if (running) {
+            sub = new Subscriber();
+            jButton2.setBackground(Color.GREEN);
+            Thread t = new Thread() {
+                @Override
+                public void run() {
+                    while (running) {
+                        final ArrayList<String> messages = sub.getMessages(jTextField1.getText());
+                        for (String message : messages) {
+                            jTextArea1.append("[Recv] " + jTextField1.getText() + ": " + message + "\n");
+                            jTextArea1.repaint();
+                        }
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(RxReciever.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
+                    }
+                    sub.unSubScribe();
+                }
+            };
+            t.start();
+
+        } else {
+            sub.unSubScribe();
+            jButton2.setBackground(Color.GRAY);
+        }
+
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
