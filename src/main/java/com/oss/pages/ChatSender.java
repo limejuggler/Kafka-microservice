@@ -41,12 +41,13 @@ public class ChatSender extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
 
-        setLayout(new java.awt.GridLayout(3, 1));
+        setLayout(new java.awt.BorderLayout());
 
         jButton1.setText("Send");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -56,7 +57,9 @@ public class ChatSender extends javax.swing.JPanel {
         });
         jPanel1.add(jButton1);
 
-        jTextField1.setText("Topic_name");
+        jTextField1.setText(Publisher.default_topic);
+        jTextField1.setMinimumSize(new java.awt.Dimension(120, 26));
+        jTextField1.setPreferredSize(new java.awt.Dimension(120, 26));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -64,21 +67,25 @@ public class ChatSender extends javax.swing.JPanel {
         });
         jPanel1.add(jTextField1);
 
-        add(jPanel1);
+        add(jPanel1, java.awt.BorderLayout.NORTH);
+
+        jPanel2.setLayout(new java.awt.GridLayout(2, 1));
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        add(jScrollPane1);
+        jPanel2.add(jScrollPane1);
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jTextArea2.setText("Write you text here!");
         jScrollPane2.setViewportView(jTextArea2);
 
-        add(jScrollPane2);
+        jPanel2.add(jScrollPane2);
+
+        add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     public void startExecuting() {
@@ -101,6 +108,7 @@ public class ChatSender extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
