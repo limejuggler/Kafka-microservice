@@ -145,7 +145,6 @@ public class ChatSenderReceiver extends javax.swing.JPanel {
             t.start();
 
         } else {
-            sub.unSubScribe();
             jButton2.setBackground(Color.GRAY);
         }
 
