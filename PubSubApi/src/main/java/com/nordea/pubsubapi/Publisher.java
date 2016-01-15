@@ -13,9 +13,10 @@ import org.apache.kafka.clients.producer.ProducerRecord;
  *
  * @author Tore
  */
-public class Publisher extends Connector {   
+public class Publisher extends Connector {
+
     KafkaProducer<String, String> producer = new KafkaProducer<String, String>(getProperties());
-    
+
     private static Properties getProperties() {
         Properties properties = new Properties();
         properties.put("bootstrap.servers", "euve35533.startvps.com:9092");
@@ -26,6 +27,17 @@ public class Publisher extends Connector {
 
     public void send(String topic, String message) {
         producer.send(new ProducerRecord<String, String>(topic, message));
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            if (producer != null) {
+                producer.close();
+            }
+        } finally {
+            super.finalize();
+        }
     }
 
 }

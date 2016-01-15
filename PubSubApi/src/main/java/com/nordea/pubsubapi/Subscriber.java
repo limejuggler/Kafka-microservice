@@ -17,6 +17,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
  * @author Tore
  */
 public class Subscriber extends Connector {
+
     KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(getProperties());
 
     private static Properties getProperties() {
@@ -41,11 +42,20 @@ public class Subscriber extends Connector {
 
     public void unSubScribe() {
         try {
-        consumer.unsubscribe();
-        }
-        catch (Exception ex)
-        {
-         // ignore unsubscribe errors
+            consumer.unsubscribe();
+        } catch (Exception ex) {
+            // ignore unsubscribe errors
         }
     }
+
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            if (consumer!=null)
+                consumer.close();
+        } finally {
+            super.finalize();
+        }
+    }
+
 }
