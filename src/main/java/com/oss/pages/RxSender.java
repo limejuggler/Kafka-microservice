@@ -5,12 +5,11 @@
  */
 package com.oss.pages;
 
+import com.nordea.pubsubapi.Connector;
 import com.nordea.pubsubapi.Publisher;
 import com.oss.Page;
 import java.awt.Color;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.text.DefaultCaret;
 
 /**
@@ -18,15 +17,15 @@ import javax.swing.text.DefaultCaret;
  * @author g46737
  */
 public class RxSender extends javax.swing.JPanel {
-    
 
     Publisher pub;
-    
+
     public RxSender(Page page) {
         pub = new Publisher();
         initComponents();
-        DefaultCaret caret = (DefaultCaret)jTextArea1.getCaret();
+        DefaultCaret caret = (DefaultCaret) jTextArea1.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        topicName.setText(Connector.default_topic);
     }
 
     /**
@@ -38,11 +37,19 @@ public class RxSender extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        topicName = new javax.swing.JTextField();
 
         setLayout(new java.awt.BorderLayout());
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jButton1.setText("Send");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -50,20 +57,43 @@ public class RxSender extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, java.awt.BorderLayout.PAGE_START);
+        jPanel1.add(jButton1);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        topicName.setMinimumSize(new java.awt.Dimension(6, 24));
+        topicName.setPreferredSize(new java.awt.Dimension(120, 24));
+        jPanel1.add(topicName);
 
-        add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        add(jPanel1, java.awt.BorderLayout.NORTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private volatile boolean execute;
 
     public void startExecuting() {
         this.execute = true;
-        thread.start();
+        Random rn = new Random();
+        Thread thread = new Thread() {
+            int i = 0;
+            @Override
+            public void run() {
+                while (execute) {
+                    i++;
+                    try {
+                        Thread.sleep(100);
+                        //final int nextInt = rn.nextInt(10000);
+                        pub.send(topicName.getText(), i + "");
+                        jTextArea1.append(topicName.getText() + " : " + i + "\n");
+                        jTextArea1.repaint();
+                    } catch (InterruptedException ex) {
+                        System.out.println("Exection sending message" + ex);
+                    }
+                }
+            }
+        };
+
+        if (!thread.isAlive()) {
+            thread.start();
+        }
+        
         jButton1.setBackground(Color.RED);
     }
 
@@ -73,7 +103,7 @@ public class RxSender extends javax.swing.JPanel {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         if (!execute) {
             startExecuting();
 
@@ -85,27 +115,10 @@ public class RxSender extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField topicName;
     // End of variables declaration//GEN-END:variables
 
-    Random rn = new Random();
-    int i = 0;
-    Thread thread = new Thread() {
-        @Override
-        public void run() {
-            while (execute) {
-                i++;
-                try {
-                    Thread.sleep(100);
-                    final int nextInt = rn.nextInt(10000);
-                    pub.send(Publisher.default_topic, nextInt+"");
-                    jTextArea1.append(Publisher.default_topic + " : " + nextInt + "\n");
-                    jTextArea1.repaint();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(RxSender.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-    };
 }
