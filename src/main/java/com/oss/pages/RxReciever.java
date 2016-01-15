@@ -30,6 +30,7 @@ public class RxReciever extends javax.swing.JPanel {
         initComponents();
         DefaultCaret caret = (DefaultCaret)jTextArea1.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        topicName.setText(Connector.default_topic); 
     }
     
     private volatile boolean running = false;
@@ -43,11 +44,19 @@ public class RxReciever extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        topicName = new javax.swing.JTextField();
 
         setLayout(new java.awt.BorderLayout());
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jButton1.setText("Receive");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -55,13 +64,13 @@ public class RxReciever extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, java.awt.BorderLayout.PAGE_START);
+        jPanel1.add(jButton1);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        topicName.setMinimumSize(new java.awt.Dimension(120, 24));
+        topicName.setPreferredSize(new java.awt.Dimension(120, 24));
+        jPanel1.add(topicName);
 
-        add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        add(jPanel1, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
   
@@ -83,7 +92,7 @@ public class RxReciever extends javax.swing.JPanel {
                 int nr =0;
                 while(running)
                 {                    
-                    final ArrayList<String> messages = sub.getMessages(Subscriber.default_topic);
+                    final ArrayList<String> messages = sub.getMessages(topicName.getText());
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException ex) {
@@ -95,7 +104,6 @@ public class RxReciever extends javax.swing.JPanel {
                         jTextArea1.append(nr + " : " + message + "\n");
                         jTextArea1.repaint();                        
                     }
-                    sub.getMessages(Connector.default_topic);
                 }
             }
         };
@@ -106,7 +114,9 @@ public class RxReciever extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField topicName;
     // End of variables declaration//GEN-END:variables
 }
