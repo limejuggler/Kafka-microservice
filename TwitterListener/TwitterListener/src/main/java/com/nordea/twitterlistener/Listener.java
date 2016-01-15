@@ -4,7 +4,6 @@
  */
 package com.nordea.twitterlistener;
 
-
 import java.util.List;
 import twitter4j.Query;
 import twitter4j.QueryResult;
@@ -17,10 +16,9 @@ import twitter4j.TwitterFactory;
  *
  * @author Emil
  */
-public class Listener
-{
-    public void listenForTag()
-    {
+public class Listener {
+
+    public void listenForTag() {
         Twitter twitter = new TwitterFactory().getInstance();
         try {
             Query query = new Query("source: https://twitter.com/nordeamarkets");

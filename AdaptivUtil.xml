@@ -15,13 +15,6 @@
       <doShow>true</doShow>
    </page>
    <page>
-      <id>2</id>
-      <pageName>Sender</pageName>
-      <pageViewClass>com.oss.pages.RxSender</pageViewClass>
-      <loadAtStartUp>true</loadAtStartUp>
-      <doShow>true</doShow>
-   </page>
-   <page>
       <id>3</id>
       <pageName>Receiver</pageName>
       <pageViewClass>com.oss.pages.RxReciever</pageViewClass>
@@ -44,8 +37,8 @@
    </page>
    <page>
       <id>10</id>
-      <pageName>ChatSender</pageName>
-      <pageViewClass>com.oss.pages.ChatSender</pageViewClass>
+      <pageName>Chat</pageName>
+      <pageViewClass>com.oss.pages.ChatSenderReceiver</pageViewClass>
       <loadAtStartUp>true</loadAtStartUp>
       <doShow>true</doShow>
    </page>
